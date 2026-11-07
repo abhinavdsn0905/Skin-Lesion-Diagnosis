@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Results & Analysis · DermaAI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/results.css') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ───── HEADER ───── -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">
+      <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="18" r="17" stroke="white" stroke-width="2"/>
+        <path d="M12 18 C12 14 15 11 18 11 C21 11 24 14 24 18 C24 23 21 26 18 26 C15 26 12 23 12 18Z" fill="rgba(255,255,255,0.3)" stroke="white" stroke-width="1.5"/>
+        <circle cx="18" cy="18" r="3" fill="white"/>
+      </svg>
+      <span class="logo-text">DermaAI</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/">About &amp; Overview</a>
+      <a href="/analyze" class="nav-btn-highlight">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="vertical-align: -2px; margin-right: 4px;">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        Image Analysis
+      </a>
+      <a href="/results" class="nav-active">Research Results</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ───── HERO ───── -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <span class="hero-badge">HAM10000 · Experimental Results</span>
+    <h1 class="page-hero-title">Research Results &amp;<br/>Model Analysis</h1>
+    <p class="page-hero-sub">
+      Comprehensive evaluation of ResNet-50, EfficientNet-B0, and DINOv2 on the
+      7-class HAM10000 skin-lesion benchmark.
+    </p>
+  </div>
+</section>
+
+<main class="results-main">
+
+  <!-- ── SUMMARY METRIC CARDS ── -->
+  <section class="results-section">
+    <h2 class="section-heading">📊 Performance Summary</h2>
+    <p class="section-sub">Key metrics on the held-out test set for all four model configurations.</p>
+
+    <div class="metrics-table-wrap">
+      <table class="metrics-table">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Test Accuracy</th>
+            <th>Balanced Accuracy</th>
+            <th>Macro F1</th>
+            <th>Macro AUROC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-resnet">
+            <td><span class="model-badge resnet">ResNet-50</span></td>
+            <td class="metric-cell best">82.42%</td>
+            <td class="metric-cell">65.53%</td>
+            <td class="metric-cell">65.19%</td>
+            <td class="metric-cell">95.58%</td>
+          </tr>
+          <tr class="row-eff">
+            <td><span class="model-badge efficientnet">EfficientNet-B0</span></td>
+            <td class="metric-cell">81.33%</td>
+            <td class="metric-cell best">65.65%</td>
+            <td class="metric-cell">64.31%</td>
+            <td class="metric-cell best">95.70%</td>
+          </tr>
+          <tr class="row-dino-frozen">
+            <td><span class="model-badge dinov2-frozen">DINOv2 Frozen</span></td>
+            <td class="metric-cell">73.93%</td>
+            <td class="metric-cell">62.46%</td>
+            <td class="metric-cell">58.77%</td>
+            <td class="metric-cell">91.81%</td>
+          </tr>
+          <tr class="row-dino-ft">
+            <td><span class="model-badge dinov2">DINOv2 Fine-tuned</span></td>
+            <td class="metric-cell">75.82%</td>
+            <td class="metric-cell">63.42%</td>
+            <td class="metric-cell best">59.20%</td>
+            <td class="metric-cell">93.74%</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="table-note">🏆 Best value per column highlighted in green.</p>
+    </div>
+  </section>
+
+  <!-- ── MODEL COMPARISON BAR CHART ── -->
+  <section class="results-section">
+    <h2 class="section-heading">📈 Model Comparison Chart</h2>
+    <p class="section-sub">Side-by-side grouped bar chart across all four evaluation metrics.</p>
+    <div class="chart-card">
+      <img src="{{ url_for('static', filename='img/model_comparison.png') }}"
+           alt="Model comparison grouped bar chart"
+           class="chart-img" loading="lazy" />
+    </div>
+  </section>
+
+  <!-- ── RADAR CHART ── -->
+  <section class="results-section">
+    <h2 class="section-heading">🕸️ Radar Chart</h2>
+    <p class="section-sub">Multi-axis spider chart highlighting each model's strengths across all metrics.</p>
+    <div class="chart-card chart-card--center">
+      <img src="{{ url_for('static', filename='img/radar_chart.png') }}"
+           alt="Radar / spider chart of model metrics"
+           class="chart-img chart-img--medium" loading="lazy" />
+    </div>
+  </section>
+
+  <!-- ── CLASS DISTRIBUTION ── -->
+  <section class="results-section">
+    <h2 class="section-heading">🗂️ Dataset Class Distribution</h2>
+    <p class="section-sub">HAM10000 is heavily imbalanced — <em>nv</em> (Melanocytic nevi) accounts for ~67% of images. This drives class-weighted loss strategies.</p>
+    <div class="chart-card">
+      <img src="{{ url_for('static', filename='img/class_distribution.png') }}"
+           alt="Class distribution bar chart"
+           class="chart-img" loading="lazy" />
+    </div>
+    <div class="class-legend">
+      <div class="legend-item"><span class="legend-dot" style="background:#3B82F6"></span><strong>nv</strong> — Melanocytic nevi (6,705)</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#EF4444"></span><strong>mel</strong> — Melanoma (1,113)</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#F59E0B"></span><strong>bkl</strong> — Benign keratosis-like lesions (1,099)</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#10B981"></span><strong>bcc</strong> — Basal cell carcinoma (514)</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#8B5CF6"></span><strong>akiec</strong> — Actinic keratoses (327)</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#06B6D4"></span><strong>vasc</strong> — Vascular lesions (142)</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#EC4899"></span><strong>df</strong> — Dermatofibroma (115)</div>
+    </div>
+  </section>
+
+  <!-- ── PER-CLASS F1 HEATMAP ── -->
+  <section class="results-section">
+    <h2 class="section-heading">🌡️ Per-Class F1 Heatmap</h2>
+    <p class="section-sub">F1 scores broken down by diagnostic class — reveals where each model struggles (rare classes like <em>df</em> and <em>akiec</em>).</p>
+    <div class="chart-card">
+      <img src="{{ url_for('static', filename='img/per_class_f1.png') }}"
+           alt="Per-class F1 score heatmap"
+           class="chart-img" loading="lazy" />
+    </div>
+  </section>
+
+  <!-- ── TRAINING CURVES ── -->
+  <section class="results-section">
+    <h2 class="section-heading">📉 Training Curves</h2>
+    <p class="section-sub">Accuracy over training epochs for ResNet-50 (8 epochs) and EfficientNet-B0 (5 epochs). Both converge well with class-weighted cross-entropy loss.</p>
+    <div class="chart-card">
+      <img src="{{ url_for('static', filename='img/training_curves.png') }}"
+           alt="Training accuracy curves"
+           class="chart-img" loading="lazy" />
+    </div>
+  </section>
+
+  <!-- ── KEY FINDINGS ── -->
+  <section class="results-section">
+    <h2 class="section-heading">💡 Key Findings</h2>
+    <div class="findings-grid">
+      <div class="finding-card">
+        <div class="finding-icon">🥇</div>
+        <h3>ResNet-50 Leads on Accuracy</h3>
+        <p>ResNet-50 achieved the highest test accuracy (82.42%) and strong per-class F1 scores, benefiting from 8 epochs of fine-tuning with AdamW and class-weighted cross-entropy loss.</p>
+      </div>
+      <div class="finding-card">
+        <div class="finding-icon">📡</div>
+        <h3>EfficientNet Best AUROC</h3>
+        <p>EfficientNet-B0 achieved the top Macro AUROC (95.70%) in just 5 epochs, demonstrating excellent discriminative ability across all seven classes despite slightly lower accuracy.</p>
+      </div>
+      <div class="finding-card">
+        <div class="finding-icon">🧊</div>
+        <h3>DINOv2 Frozen Lags Behind</h3>
+        <p>Using frozen DINOv2 features with logistic regression yields 73.93% accuracy. Partial fine-tuning (last 2 transformer blocks) improves this to 75.82% — still below CNN baselines.</p>
+      </div>
+      <div class="finding-card">
+        <div class="finding-icon">⚖️</div>
+        <h3>Class Imbalance Challenge</h3>
+        <p>The ~58:1 imbalance (nv vs df) makes balanced accuracy and macro-F1 more informative than raw accuracy. All models struggle with rare classes like <em>df</em> and <em>akiec</em>.</p>
+      </div>
+      <div class="finding-card">
+        <div class="finding-icon">🔬</div>
+        <h3>AUROC vs F1 Trade-off</h3>
+        <p>High AUROC (91–96%) across all models shows strong class-separability. Lower Macro-F1 (58–65%) reflects difficulty making confident predictions on minority classes.</p>
+      </div>
+      <div class="finding-card">
+        <div class="finding-icon">🚀</div>
+        <h3>Future Work</h3>
+        <p>Consistent checkpoint selection, external validation sets, calibrated confidence scores, and dermatologist-annotated segmentation masks are recommended next steps.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TRAINING CONFIGURATION ── -->
+  <section class="results-section">
+    <h2 class="section-heading">⚙️ Training Configuration</h2>
+    <div class="config-grid">
+      <div class="config-card resnet-border">
+        <h3><span class="config-dot resnet-dot"></span> ResNet-50</h3>
+        <ul>
+          <li>Pretrained on ImageNet</li>
+          <li>8 epochs fine-tuning</li>
+          <li>AdamW optimizer</li>
+          <li>Class-weighted CE loss</li>
+          <li>LR scheduler: StepLR</li>
+          <li>Input: 224×224 RGB</li>
+        </ul>
+      </div>
+      <div class="config-card eff-border">
+        <h3><span class="config-dot eff-dot"></span> EfficientNet-B0</h3>
+        <ul>
+          <li>Pretrained on ImageNet</li>
+          <li>5 epochs fine-tuning</li>
+          <li>AdamW optimizer</li>
+          <li>Class-weighted CE loss</li>
+          <li>LR scheduler: CosineAnnealing</li>
+          <li>Input: 224×224 RGB</li>
+        </ul>
+      </div>
+      <div class="config-card dino-border">
+        <h3><span class="config-dot dino-dot"></span> DINOv2 (facebook/dinov2-base)</h3>
+        <ul>
+          <li>Frozen backbone → logistic regression</li>
+          <li>Partial fine-tuning: last 2 transformer blocks</li>
+          <li>3 epochs for fine-tuning</li>
+          <li>AdamW with low LR for backbone</li>
+          <li>CLS token output → linear head</li>
+          <li>Input: 224×224 RGB</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ───── FOOTER ───── -->
+<footer class="site-footer">
+  <p>CSE-471 · Skin Lesion Classification Research · HAM10000 Dataset · Educational Use Only</p>
+</footer>
+
+</body>
+</html>
+

@@ -1,0 +1,268 @@
+/* ============================================================
+   analysis.css — Analysis workspace & Plain-English Guide
+   ============================================================ */
+
+.analysis-guide-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #EFF6FF;
+  border: 1.5px solid #BFDBFE;
+  border-radius: 18px;
+  padding: 20px 24px;
+  margin-bottom: 32px;
+}
+
+.guide-icon {
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.guide-text h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1E40AF;
+  margin-bottom: 6px;
+}
+
+.guide-text p {
+  font-size: 0.9rem;
+  color: #334155;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.badge-mini-danger {
+  display: inline-block;
+  background: #FEF2F2;
+  color: #DC2626;
+  border: 1px solid #FECACA;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+/* ── Plain English Report Guide ── */
+.patient-report-guide {
+  background: white;
+  border: 1px solid #E2E8F0;
+  border-radius: 28px;
+  padding: 48px 40px;
+  margin-top: 48px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.patient-report-guide h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0F172A;
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+}
+
+.guide-subtitle {
+  font-size: 0.98rem;
+  color: #64748B;
+  margin-bottom: 36px;
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+.guide-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+@media (max-width: 1080px) {
+  .guide-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .guide-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.guide-card {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 20px 16px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.guide-card:hover {
+  transform: translateY(-2px);
+  border-color: #CBD5E1;
+}
+
+.guide-badge-num {
+  width: 28px;
+  height: 28px;
+  background: #2563EB;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.guide-card h3 {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #1E293B;
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+
+.guide-card p {
+  font-size: 0.88rem;
+  color: #475569;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.report-link-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #F0FDF4 0%, #EFF6FF 100%);
+  border: 1.5px solid #BAE6FD;
+  border-radius: 18px;
+  padding: 24px 32px;
+  gap: 20px;
+}
+
+@media (max-width: 700px) {
+  .report-link-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.report-link-banner h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 4px;
+}
+
+.report-link-banner p {
+  font-size: 0.88rem;
+  color: #475569;
+  margin: 0;
+}
+
+/* ============================================================
+   PLAIN TEXT REVIEW CARD (Inside Model Results)
+   ============================================================ */
+.model-text-review {
+  margin-top: 20px;
+  border-radius: 14px;
+  padding: 18px 20px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  transition: all 0.2s ease;
+}
+
+.model-text-review.risk-high {
+  background: #FFF5F5;
+  border-color: #FECACA;
+}
+
+.model-text-review.risk-medium {
+  background: #FFFDF0;
+  border-color: #FDE68A;
+}
+
+.model-text-review.risk-low {
+  background: #F0FDF4;
+  border-color: #BBF7D0;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.review-icon {
+  font-size: 1.2rem;
+}
+
+.review-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1E293B;
+  margin: 0;
+}
+
+.review-summary {
+  font-size: 0.88rem;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.review-detail-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .review-detail-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.review-detail-box {
+  background: white;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.82rem;
+}
+
+.review-detail-box strong {
+  color: #1E293B;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.review-detail-box span {
+  color: #475569;
+  line-height: 1.5;
+}
+
+.review-detail-box.advice-box {
+  border-left: 3px solid #2563EB;
+}
+
+.review-detail-box.watch-box {
+  border-left: 3px solid #10B981;
+}
+
+.model-text-review.risk-high .review-detail-box.advice-box {
+  border-left-color: #DC2626;
+}
+
+

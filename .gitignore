@@ -1,0 +1,79 @@
+# ───────────────────────────────────────────────
+# DermaAI · Skin Lesion Classification — .gitignore
+# ───────────────────────────────────────────────
+
+# ── Large dataset images (HAM10000 ~2.6 GB) ──
+HAM10000_images_part_1/
+HAM10000_images_part_2/
+Skin_lesion_datset/
+*.jpg
+*.jpeg
+*.png
+*.bmp
+# Allow static app images (charts we generated)
+!skin_lesion_app/static/img/*.png
+
+# ── Trained model checkpoint files (can be 100+ MB each) ──
+*.pth
+*.pt
+*.ckpt
+*.bin
+*.h5
+*.pkl
+
+# ── Python ──
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+*.pyc
+
+# ── Virtual environments ──
+venv/
+.venv/
+env/
+ENV/
+.env
+
+# ── Jupyter ──
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ── Upload temp folder ──
+skin_lesion_app/uploads/*
+!skin_lesion_app/uploads/.gitkeep
+
+# ── IDE & OS ──
+.vscode/settings.json
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Logs & temp ──
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+
+# ── Docs / extras not part of the codebase ──
+*.zip
+*.pdf
+~$*.docx
+~$*.xlsx
+

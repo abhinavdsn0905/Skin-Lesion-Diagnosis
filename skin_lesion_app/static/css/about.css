@@ -1,0 +1,217 @@
+/* ============================================================
+   about.css — About page styles
+   ============================================================ */
+
+/* ── Import shared page-hero from results.css ── */
+
+.about-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 56px 24px 80px;
+}
+
+/* ── Sections ── */
+.about-section { margin-bottom: 72px; }
+.about-section.alt-bg {
+  background: #F8FAFC;
+  border-radius: 24px;
+  padding: 48px;
+  margin-left: -24px;
+  margin-right: -24px;
+}
+.about-section h2 {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #1E293B;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+.about-section p {
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.75;
+  margin-bottom: 14px;
+  max-width: 760px;
+}
+
+/* ── Two column layout ── */
+.about-two-col {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 48px;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .about-two-col { grid-template-columns: 1fr; }
+  .about-section.alt-bg { margin-left: 0; margin-right: 0; padding: 32px 24px; }
+}
+
+.about-text h2 { margin-bottom: 20px; }
+
+/* ── Stat cards ── */
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.stat-card {
+  background: white;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 20px 16px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.stat-num {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #1E40AF;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.stat-label { font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* ── Class cards ── */
+.section-heading {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #1E293B;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+.section-sub {
+  font-size: 0.95rem;
+  color: #64748B;
+  margin-bottom: 28px;
+  max-width: 700px;
+  line-height: 1.65;
+}
+
+.class-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+.class-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1.5px solid transparent;
+}
+.class-card.high-risk   { background: #FEF2F2; border-color: #FECACA; }
+.class-card.low-risk    { background: #F0FDF4; border-color: #BBF7D0; }
+.class-card.medium-risk { background: #FFFBEB; border-color: #FDE68A; }
+.class-abbr {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  background: white;
+  border-radius: 8px;
+  padding: 6px 10px;
+  min-width: 56px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  color: #1E293B;
+}
+.class-info { display: flex; flex-direction: column; gap: 2px; }
+.class-info strong { font-size: 0.88rem; font-weight: 700; color: #1E293B; }
+.class-info span   { font-size: 0.78rem; color: #64748B; }
+
+/* ── Methodology steps ── */
+.methodology-steps { display: flex; flex-direction: column; gap: 20px; }
+.method-step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  background: white;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  transition: transform 0.2s;
+}
+.method-step:hover { transform: translateX(4px); }
+.step-num {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, #1E40AF, #3B82F6);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.step-body h3 { font-size: 1rem; font-weight: 700; color: #1E293B; margin-bottom: 6px; }
+.step-body p  { font-size: 0.88rem; color: #475569; line-height: 1.65; margin: 0; }
+
+/* ── Disclaimer ── */
+.disclaimer-big {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  background: #FEF2F2;
+  border: 1.5px solid #FECACA;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.disclaimer-icon { font-size: 2.4rem; flex-shrink: 0; }
+.disclaimer-text { font-size: 0.95rem; color: #7F1D1D; line-height: 1.65; }
+.disclaimer-text strong { color: #DC2626; }
+
+.limitations-list {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.limitations-list li { font-size: 0.9rem; color: #475569; line-height: 1.65; }
+
+/* ── Tech grid ── */
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+}
+.tech-card {
+  background: white;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 20px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.tech-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.09); }
+.tech-icon { font-size: 2rem; }
+.tech-card strong { font-size: 0.9rem; font-weight: 700; color: #1E293B; }
+.tech-card span   { font-size: 0.78rem; color: #64748B; }
+
+/* ── CTA section ── */
+.cta-section {
+  text-align: center;
+  background: linear-gradient(135deg, #EFF6FF, #F0FDF4);
+  border-radius: 24px;
+  padding: 56px 32px;
+  border: 1px solid #E2E8F0;
+}
+.cta-section h2 { font-size: 1.8rem; font-weight: 800; color: #1E293B; margin-bottom: 10px; }
+.cta-section p  { font-size: 1rem; color: #475569; margin-bottom: 32px; }
+.cta-section .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 12px; font-size: 1rem; font-weight: 600; text-decoration: none; margin: 0 8px; transition: transform 0.15s, box-shadow 0.15s; }
+.btn-primary.cta-btn { background: linear-gradient(135deg,#2563EB,#3B82F6); color: white; box-shadow: 0 4px 14px rgba(37,99,235,0.35); }
+.btn-primary.cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.45); }
+.btn-secondary.cta-btn { background: white; color: #1E40AF; border: 1.5px solid #BFDBFE; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.btn-secondary.cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DermaAI · Skin Lesion Classification Project</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ───── HEADER ───── -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">
+      <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="18" r="17" stroke="white" stroke-width="2"/>
+        <path d="M12 18 C12 14 15 11 18 11 C21 11 24 14 24 18 C24 23 21 26 18 26 C15 26 12 23 12 18Z" fill="rgba(255,255,255,0.3)" stroke="white" stroke-width="1.5"/>
+        <circle cx="18" cy="18" r="3" fill="white"/>
+      </svg>
+      <span class="logo-text">DermaAI</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/" class="nav-active">About &amp; Overview</a>
+      <a href="/analyze" class="nav-btn-highlight">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="vertical-align: -2px; margin-right: 4px;">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        Image Analysis
+      </a>
+      <a href="/results">Research Results</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ───── HERO ───── -->
+<section class="landing-hero">
+  <div class="hero-content">
+    <span class="hero-badge">CSE-471 Deep Learning Research · HAM10000 Benchmark</span>
+    <h1 class="hero-title">Automated Skin Lesion<br/>Analysis &amp; Classification</h1>
+    <p class="hero-subtitle">
+      A comparative deep learning study benchmarking <strong>Convolutional Neural Networks (ResNet-50, EfficientNet-B0)</strong> 
+      against <strong>Self-Supervised Vision Transformers (DINOv2)</strong> on 10,015 dermatoscopic images.
+    </p>
+
+    <div class="hero-actions">
+      <a href="/analyze" class="btn-hero-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+          <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+        </svg>
+        Upload Picture for Analysis
+      </a>
+      <a href="/results" class="btn-hero-secondary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+        View Research Graphs &amp; Data
+      </a>
+    </div>
+
+    <div class="disclaimer-banner">
+      <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+      <strong>Educational &amp; Research Prototype Only.</strong> Predictions are AI probability assessments, not medical diagnoses. Always consult a certified dermatologist.
+    </div>
+  </div>
+</section>
+
+<!-- ───── MAIN CONTENT ───── -->
+<main class="landing-main">
+
+  <!-- ── PROJECT OVERVIEW & STATS ── -->
+  <section class="landing-section">
+    <div class="about-two-col">
+      <div class="about-text">
+        <div class="section-tag">About the Project</div>
+        <h2>What is this research about?</h2>
+        <p>
+          Skin cancer is one of the most common malignancies worldwide. Detecting hazardous lesions like <strong>melanoma</strong> 
+          at an early stage significantly improves patient survival rates. However, visual evaluation through dermoscopy is challenging 
+          because early malignant skin spots often share visual similarities with harmless moles.
+        </p>
+        <p>
+          This project evaluates whether modern AI systems can reliably distinguish between seven distinct types of skin lesions. 
+          Specifically, we investigate whether state-of-the-art <strong>Vision Foundation Models (DINOv2)</strong> pretrained without human supervision 
+          can outperform industry-standard <strong>Convolutional Neural Networks (ResNet-50 and EfficientNet-B0)</strong> when evaluated under strict, 
+          lesion-aware validation protocols.
+        </p>
+      </div>
+
+      <div class="stats-card-box">
+        <div class="stat-pill">
+          <span class="stat-big">10,015</span>
+          <span class="stat-desc">Dermatoscopic Images</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-big">7,470</span>
+          <span class="stat-desc">Unique Lesions Evaluated</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-big">7</span>
+          <span class="stat-desc">Diagnostic Classes</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-big">95.70%</span>
+          <span class="stat-desc">Top Macro AUROC</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS / PIPELINE ── -->
+  <section class="landing-section alt-surface">
+    <div class="section-header-center">
+      <div class="section-tag">Workflow</div>
+      <h2>How The AI Analyzes An Image</h2>
+      <p>From initial dermoscopic photograph upload to multi-model differential diagnosis.</p>
+    </div>
+
+    <div class="steps-flow">
+      <div class="step-card">
+        <div class="step-badge">1</div>
+        <div class="step-icon">📸</div>
+        <h3>Image Preprocessing</h3>
+        <p>The input photograph is centered, resized to 224×224 pixels, and normalized using RGB standard distribution curves.</p>
+      </div>
+
+      <div class="step-arrow">→</div>
+
+      <div class="step-card">
+        <div class="step-badge">2</div>
+        <div class="step-icon">🧠</div>
+        <h3>Multi-Model Inference</h3>
+        <p>The image is processed simultaneously through ResNet-50, EfficientNet-B0, and DINOv2 feature extractors.</p>
+      </div>
+
+      <div class="step-arrow">→</div>
+
+      <div class="step-card">
+        <div class="step-badge">3</div>
+        <div class="step-icon">⚖️</div>
+        <h3>Risk Stratification</h3>
+        <p>Probabilities for all 7 classes are calculated, generating clinical risk indicators (High, Medium, or Low Risk).</p>
+      </div>
+    </div>
+
+    <div class="cta-center-bar">
+      <p>Want to see the models in action on your own lesion photo?</p>
+      <a href="/analyze" class="btn-primary-compact">Launch Analysis Workspace →</a>
+    </div>
+  </section>
+
+  <!-- ── 7 DIAGNOSTIC CATEGORIES ── -->
+  <section class="landing-section">
+    <div class="section-header-center">
+      <div class="section-tag">Disease Taxonomy</div>
+      <h2>The 7 Diagnostic Categories Explained</h2>
+      <p>Our models classify dermoscopic images into these seven medical classes defined in the HAM10000 dataset.</p>
+    </div>
+
+    <div class="diseases-grid">
+      <div class="disease-card high-danger">
+        <div class="risk-badge-mini danger">High Risk · Malignant</div>
+        <div class="disease-head">
+          <span class="disease-code">mel</span>
+          <h3>Melanoma</h3>
+        </div>
+        <p>The most aggressive and dangerous type of skin cancer. Early detection is vital for surgical removal and curative prognosis.</p>
+        <span class="sample-count">1,113 dataset samples</span>
+      </div>
+
+      <div class="disease-card high-danger">
+        <div class="risk-badge-mini danger">High Risk · Malignant</div>
+        <div class="disease-head">
+          <span class="disease-code">bcc</span>
+          <h3>Basal Cell Carcinoma</h3>
+        </div>
+        <p>The most common form of skin cancer. Rarely metastasizes, but can cause substantial local tissue destruction if untreated.</p>
+        <span class="sample-count">514 dataset samples</span>
+      </div>
+
+      <div class="disease-card high-danger">
+        <div class="risk-badge-mini danger">High Risk · Pre-cancerous</div>
+        <div class="disease-head">
+          <span class="disease-code">akiec</span>
+          <h3>Actinic Keratoses</h3>
+        </div>
+        <p>Pre-cancerous crusty lesions caused by sun exposure that can transform into invasive squamous cell carcinomas.</p>
+        <span class="sample-count">327 dataset samples</span>
+      </div>
+
+      <div class="disease-card low-danger">
+        <div class="risk-badge-mini safe">Low Risk · Benign</div>
+        <div class="disease-head">
+          <span class="disease-code">nv</span>
+          <h3>Melanocytic Nevi</h3>
+        </div>
+        <p>Common benign moles composed of pigment-producing melanocyte cells. Represents the dominant majority in populations.</p>
+        <span class="sample-count">6,705 dataset samples</span>
+      </div>
+
+      <div class="disease-card low-danger">
+        <div class="risk-badge-mini safe">Low Risk · Benign</div>
+        <div class="disease-head">
+          <span class="disease-code">bkl</span>
+          <h3>Benign Keratosis</h3>
+        </div>
+        <p>Non-cancerous skin growths like seborrheic keratoses, solar lentigines, and lichen-planus-like keratoses.</p>
+        <span class="sample-count">1,099 dataset samples</span>
+      </div>
+
+      <div class="disease-card low-danger">
+        <div class="risk-badge-mini safe">Low Risk · Benign</div>
+        <div class="disease-head">
+          <span class="disease-code">df</span>
+          <h3>Dermatofibroma</h3>
+        </div>
+        <p>Harmless fibrous nodules beneath the skin surface, often reacting after minor trauma or insect bites.</p>
+        <span class="sample-count">115 dataset samples</span>
+      </div>
+
+      <div class="disease-card mid-danger">
+        <div class="risk-badge-mini warn">Medium Risk · Vascular</div>
+        <div class="disease-head">
+          <span class="disease-code">vasc</span>
+          <h3>Vascular Lesions</h3>
+        </div>
+        <p>Benign or reactive blood-vessel proliferations including angiomas, pyogenic granulomas, and telangiectasias.</p>
+        <span class="sample-count">142 dataset samples</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BENCHMARK HIGHLIGHTS ── -->
+  <section class="landing-section alt-surface">
+    <div class="section-header-center">
+      <div class="section-tag">Tested Architectures</div>
+      <h2>Model Architectures &amp; Benchmark Summary</h2>
+      <p>How the evaluated artificial intelligence configurations performed on the held-out test cohort.</p>
+    </div>
+
+    <div class="models-summary-grid">
+      <div class="model-sum-card resnet-accent">
+        <div class="model-sum-header">
+          <span class="dot-indicator blue"></span>
+          <div>
+            <h3>ResNet-50</h3>
+            <span class="model-type">Deep Residual Network</span>
+          </div>
+        </div>
+        <div class="stat-row">
+          <div><span class="val">82.42%</span><span class="lbl">Accuracy</span></div>
+          <div><span class="val">65.19%</span><span class="lbl">Macro-F1</span></div>
+          <div><span class="val">95.58%</span><span class="lbl">AUROC</span></div>
+        </div>
+        <p>Highest overall accuracy and balanced macro-F1. Residual skip connections capture deep hierarchical visual patterns reliably.</p>
+      </div>
+
+      <div class="model-sum-card eff-accent">
+        <div class="model-sum-header">
+          <span class="dot-indicator green"></span>
+          <div>
+            <h3>EfficientNet-B0</h3>
+            <span class="model-type">Compound Scaled CNN</span>
+          </div>
+        </div>
+        <div class="stat-row">
+          <div><span class="val">81.33%</span><span class="lbl">Accuracy</span></div>
+          <div><span class="val">65.65%</span><span class="lbl">Bal. Acc.</span></div>
+          <div><span class="val">95.70%</span><span class="lbl">AUROC</span></div>
+        </div>
+        <p>Highest Macro AUROC and Balanced Accuracy. Extremely lightweight and fast while achieving top-tier class discrimination.</p>
+      </div>
+
+      <div class="model-sum-card dino-accent">
+        <div class="model-sum-header">
+          <span class="dot-indicator purple"></span>
+          <div>
+            <h3>DINOv2 Fine-tuned</h3>
+            <span class="model-type">Vision Transformer (ViT)</span>
+          </div>
+        </div>
+        <div class="stat-row">
+          <div><span class="val">75.82%</span><span class="lbl">Accuracy</span></div>
+          <div><span class="val">59.20%</span><span class="lbl">Macro-F1</span></div>
+          <div><span class="val">93.74%</span><span class="lbl">AUROC</span></div>
+        </div>
+        <p>Self-supervised foundation model adapted via fine-tuning its final transformer blocks. Captures global patch-attention relationships.</p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 32px;">
+      <a href="/results" class="btn-text-link">Explore the Full Report, Graphs &amp; Error Analysis →</a>
+    </div>
+  </section>
+
+  <!-- ── BOTTOM CALL TO ACTION ── -->
+  <section class="landing-cta">
+    <h2>Ready to Test the Classifier?</h2>
+    <p>Upload a dermoscopic image and receive real-time probabilistic diagnosis and risk assessment from all models.</p>
+    <div class="cta-btns">
+      <a href="/analyze" class="btn-hero-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        Go to Image Analysis
+      </a>
+      <a href="/results" class="btn-hero-secondary">View Scientific Results</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ───── FOOTER ───── -->
+<footer class="site-footer">
+  <p>CSE-471 Deep Learning Project · Skin Lesion Classification · Educational &amp; Research Use Only</p>
+</footer>
+
+</body>
+</html>
+

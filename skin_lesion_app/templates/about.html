@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About · DermaAI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ───── HEADER ───── -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">
+      <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="18" r="17" stroke="white" stroke-width="2"/>
+        <path d="M12 18 C12 14 15 11 18 11 C21 11 24 14 24 18 C24 23 21 26 18 26 C15 26 12 23 12 18Z" fill="rgba(255,255,255,0.3)" stroke="white" stroke-width="1.5"/>
+        <circle cx="18" cy="18" r="3" fill="white"/>
+      </svg>
+      <span class="logo-text">DermaAI</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/">Classify</a>
+      <a href="/results">Results</a>
+      <a href="/about" class="nav-active">About</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ───── PAGE HERO ───── -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <span class="hero-badge">CSE-471 · Research Project</span>
+    <h1 class="page-hero-title">About This<br/>Project</h1>
+    <p class="page-hero-sub">
+      A deep-learning research prototype for automated skin-lesion classification
+      using the HAM10000 dermoscopic image dataset.
+    </p>
+  </div>
+</section>
+
+<main class="about-main">
+
+  <!-- ── PROJECT OVERVIEW ── -->
+  <section class="about-section">
+    <div class="about-two-col">
+      <div class="about-text">
+        <h2>🔬 Project Overview</h2>
+        <p>
+          This project develops and evaluates deep-learning models for the automated
+          classification of dermoscopic skin-lesion images into seven diagnostic
+          categories defined by the <strong>HAM10000 dataset</strong> (Human Against
+          Machine with 10,000 training images).
+        </p>
+        <p>
+          Three model architectures are compared: a CNN baseline (<strong>ResNet-50</strong>),
+          a lightweight efficient network (<strong>EfficientNet-B0</strong>), and a modern
+          vision-foundation model (<strong>DINOv2</strong>) evaluated both as frozen feature
+          extractor and with partial fine-tuning.
+        </p>
+        <p>
+          The goal is to explore how self-supervised vision-transformer features compare
+          to supervised CNN baselines on a clinically relevant, class-imbalanced medical
+          imaging task.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <span class="stat-num">10,015</span>
+          <span class="stat-label">Total Images</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">7</span>
+          <span class="stat-label">Diagnostic Classes</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">4</span>
+          <span class="stat-label">Model Configurations</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">95.7%</span>
+          <span class="stat-label">Best AUROC</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DATASET ── -->
+  <section class="about-section alt-bg">
+    <h2 class="section-heading">📁 The HAM10000 Dataset</h2>
+    <p class="section-sub">
+      A large collection of multi-source dermatoscopic images of common pigmented skin lesions,
+      released as a benchmark for skin-lesion analysis research.
+    </p>
+    <div class="class-cards">
+      <div class="class-card high-risk">
+        <div class="class-abbr">mel</div>
+        <div class="class-info">
+          <strong>Melanoma</strong>
+          <span>1,113 images · High Risk</span>
+        </div>
+      </div>
+      <div class="class-card low-risk">
+        <div class="class-abbr">nv</div>
+        <div class="class-info">
+          <strong>Melanocytic Nevi</strong>
+          <span>6,705 images · Low Risk</span>
+        </div>
+      </div>
+      <div class="class-card high-risk">
+        <div class="class-abbr">bcc</div>
+        <div class="class-info">
+          <strong>Basal Cell Carcinoma</strong>
+          <span>514 images · High Risk</span>
+        </div>
+      </div>
+      <div class="class-card high-risk">
+        <div class="class-abbr">akiec</div>
+        <div class="class-info">
+          <strong>Actinic Keratoses</strong>
+          <span>327 images · High Risk</span>
+        </div>
+      </div>
+      <div class="class-card low-risk">
+        <div class="class-abbr">bkl</div>
+        <div class="class-info">
+          <strong>Benign Keratosis-like</strong>
+          <span>1,099 images · Low Risk</span>
+        </div>
+      </div>
+      <div class="class-card low-risk">
+        <div class="class-abbr">df</div>
+        <div class="class-info">
+          <strong>Dermatofibroma</strong>
+          <span>115 images · Low Risk</span>
+        </div>
+      </div>
+      <div class="class-card medium-risk">
+        <div class="class-abbr">vasc</div>
+        <div class="class-info">
+          <strong>Vascular Lesions</strong>
+          <span>142 images · Medium Risk</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── METHODOLOGY ── -->
+  <section class="about-section">
+    <h2 class="section-heading">🧠 Methodology</h2>
+    <div class="methodology-steps">
+      <div class="method-step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Data Preparation</h3>
+          <p>Lesion-aware train/val/test splitting ensuring no patient appears in multiple splits. Class-weighted sampling and augmentation (flips, rotations, color jitter) to address imbalance.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>CNN Baselines</h3>
+          <p>ResNet-50 and EfficientNet-B0 pretrained on ImageNet, with final classification head replaced and fine-tuned end-to-end using AdamW and class-weighted cross-entropy loss.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>DINOv2 Evaluation</h3>
+          <p>Facebook's DINOv2-base evaluated first as a frozen feature extractor (CLS token → logistic regression), then with partial fine-tuning of the last 2 transformer blocks.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Evaluation Metrics</h3>
+          <p>Test accuracy, balanced accuracy, macro-F1, and macro-AUROC. Per-class metrics and confusion matrices used to diagnose where each model fails.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Explainability</h3>
+          <p>Grad-CAM visualizations for CNN models and DINOv2 attention maps to qualitatively assess whether models focus on clinically relevant lesion regions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── LIMITATIONS ── -->
+  <section class="about-section alt-bg">
+    <h2 class="section-heading">⚠️ Limitations &amp; Disclaimer</h2>
+    <div class="disclaimer-big">
+      <div class="disclaimer-icon">🏥</div>
+      <div class="disclaimer-text">
+        <strong>This is an educational research prototype, not a clinically validated diagnostic system.</strong>
+        Predictions are softmax scores, not calibrated disease probabilities. Always consult a qualified
+        dermatologist for any clinical evaluation.
+      </div>
+    </div>
+    <ul class="limitations-list">
+      <li>HAM10000 is class-imbalanced; rare classes have few test examples and results may not reflect true clinical performance.</li>
+      <li>Results are from a held-out split of the same dataset — they do not establish generalization to other hospitals, cameras, skin tones, or phone photographs.</li>
+      <li>DINOv2 attention and Grad-CAM are qualitative attribution tools, not proof of causal clinical reasoning.</li>
+      <li>Softmax scores are not calibrated probabilities of disease.</li>
+      <li>Checkpoint selection procedures were not perfectly uniform across all models.</li>
+    </ul>
+  </section>
+
+  <!-- ── TECH STACK ── -->
+  <section class="about-section">
+    <h2 class="section-heading">🛠️ Technology Stack</h2>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-icon">🐍</div>
+        <strong>Python 3.10</strong>
+        <span>Core language</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">🔥</div>
+        <strong>PyTorch 2.x</strong>
+        <span>Deep learning</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">🤗</div>
+        <strong>Transformers</strong>
+        <span>DINOv2 backbone</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">🌐</div>
+        <strong>Flask</strong>
+        <span>Web backend</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">📊</div>
+        <strong>Matplotlib</strong>
+        <span>Visualizations</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">🧬</div>
+        <strong>Torchvision</strong>
+        <span>Pretrained CNNs</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">☁️</div>
+        <strong>Google Colab</strong>
+        <span>Training (T4 GPU)</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon">📁</div>
+        <strong>HAM10000</strong>
+        <span>Benchmark dataset</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="about-section cta-section">
+    <h2>Ready to Try the Classifier?</h2>
+    <p>Upload a dermoscopic image and compare predictions from all three models.</p>
+    <a href="/" class="btn-primary cta-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      Go to Classifier
+    </a>
+    <a href="/results" class="btn-secondary cta-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      View Full Results
+    </a>
+  </section>
+
+</main>
+
+<!-- ───── FOOTER ───── -->
+<footer class="site-footer">
+  <p>CSE-471 · Skin Lesion Classification Research · HAM10000 Dataset · Educational Use Only</p>
+</footer>
+
+</body>
+</html>
+

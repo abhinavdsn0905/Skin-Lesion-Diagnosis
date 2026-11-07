@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Analysis &amp; Classifier · DermaAI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/results.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/analysis.css') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+
+  <!-- ───── HEADER ───── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="/">
+        <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="18" r="17" stroke="white" stroke-width="2" />
+          <path d="M12 18 C12 14 15 11 18 11 C21 11 24 14 24 18 C24 23 21 26 18 26 C15 26 12 23 12 18Z"
+            fill="rgba(255,255,255,0.3)" stroke="white" stroke-width="1.5" />
+          <circle cx="18" cy="18" r="3" fill="white" />
+        </svg>
+        <span class="logo-text">DermaAI</span>
+      </a>
+      <nav class="nav-links">
+        <a href="/">About &amp; Overview</a>
+        <a href="/analyze" class="nav-active">Image Analysis</a>
+        <a href="/results">Research Results</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ───── HERO ───── -->
+  <section class="hero" id="classifier">
+    <div class="hero-content">
+      <span class="hero-badge">Multi-Model Diagnostic Workspace</span>
+      <h1 class="hero-title">Skin Lesion<br />Image Analysis</h1>
+      <p class="hero-subtitle">
+        Upload or drag &amp; drop a dermoscopic photograph to run differential diagnosis
+        across ResNet-50, EfficientNet-B0, and DINOv2 simultaneously.
+      </p>
+      <div class="disclaimer-banner">
+        <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+          <path fill-rule="evenodd"
+            d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+            clip-rule="evenodd" />
+        </svg>
+        <strong>Educational prototype.</strong> Not intended as a substitute for clinical biopsy or board-certified
+        dermatologist review.
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── CLASSIFIER INTERFACE ───── -->
+  <main class="main-content">
+
+    <!-- ── SIMPLE EXPLANATION CALLOUT FOR NAIVE USERS ── -->
+    <section class="analysis-guide-banner">
+      <div class="guide-icon">💡</div>
+      <div class="guide-text">
+        <h3>How To Read Your Analysis</h3>
+        <p>
+          Upload a clear, focused dermoscopic photo of the skin lesion. The AI models will calculate probabilities for 7
+          possible conditions
+          and provide a <strong>Risk Banner (High, Medium, or Low Risk)</strong>. If a result indicates <span
+            class="badge-mini-danger">High Risk (e.g. Melanoma or BCC)</span>,
+          it is strongly advised to seek prompt medical assessment by a healthcare specialist.
+        </p>
+      </div>
+    </section>
+
+    <div class="classifier-grid">
+
+      <!-- LEFT: Upload + controls -->
+      <div class="card upload-card">
+        <h2 class="card-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
+          Step 1: Upload Photograph
+        </h2>
+
+        <!-- Drop zone -->
+        <div class="dropzone" id="dropzone">
+          <input type="file" id="file-input" accept="image/*" class="sr-only" />
+          <div class="dropzone-idle" id="dropzone-idle">
+            <svg class="dropzone-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="32" r="28" fill="#EBF4FF" stroke="#93C5FD" stroke-width="2" />
+              <path d="M32 20v16M25 27l7-7 7 7" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <rect x="20" y="38" width="24" height="4" rx="2" fill="#93C5FD" />
+            </svg>
+            <p class="dropzone-label">Drag &amp; drop or <label for="file-input" class="dropzone-link">browse
+                image</label></p>
+            <p class="dropzone-hint">PNG, JPG, JPEG, BMP · Up to 16 MB</p>
+          </div>
+          <div class="dropzone-preview hidden" id="dropzone-preview">
+            <img id="preview-img" src="" alt="Preview" />
+            <button class="remove-btn" id="remove-btn" title="Remove image">
+              <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14">
+                <path fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Model selection -->
+        <div class="model-section">
+          <h3 class="section-label">Step 2: Select AI Models</h3>
+          <div class="model-checkboxes">
+            {% set real_loaded = loaded_models | default([]) %}
+            <label class="model-chip active">
+              <input type="checkbox" name="models" value="ResNet-50" checked />
+              <span class="chip-dot resnet"></span>
+              ResNet-50
+              {% if 'ResNet-50' in real_loaded %}
+              <span class="chip-badge chip-badge-online">trained checkpoint</span>
+              {% else %}
+              <span class="chip-badge chip-badge-demo">simulation mode</span>
+              {% endif %}
+            </label>
+            <label class="model-chip active">
+              <input type="checkbox" name="models" value="EfficientNet-B0" checked />
+              <span class="chip-dot efficientnet"></span>
+              EfficientNet-B0
+              {% if 'EfficientNet-B0' in real_loaded %}
+              <span class="chip-badge chip-badge-online">trained checkpoint</span>
+              {% else %}
+              <span class="chip-badge chip-badge-demo">simulation mode</span>
+              {% endif %}
+            </label>
+            <label class="model-chip active">
+              <input type="checkbox" name="models" value="DINOv2" checked />
+              <span class="chip-dot dinov2"></span>
+              DINOv2 Fine-tuned
+              {% if 'DINOv2' in real_loaded %}
+              <span class="chip-badge chip-badge-online">trained checkpoint</span>
+              {% else %}
+              <span class="chip-badge chip-badge-demo">simulation mode</span>
+              {% endif %}
+            </label>
+          </div>
+        </div>
+
+        <!-- Analyze button -->
+        <button class="btn-primary" id="analyze-btn" disabled>
+          <svg id="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18"
+            height="18">
+            <circle cx="11" cy="11" r="8" />
+            <path d="M21 21l-4.35-4.35" />
+          </svg>
+          <span id="btn-text">Analyze Image</span>
+        </button>
+
+        <!-- Error area -->
+        <div id="error-box" class="error-box hidden"></div>
+      </div>
+
+      <!-- RIGHT: Results -->
+      <div class="card results-card" id="results-panel">
+        <div class="results-placeholder" id="results-placeholder">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="72" height="72">
+            <circle cx="40" cy="40" r="36" fill="#F0F9FF" stroke="#BAE6FD" stroke-width="2" />
+            <path d="M28 40h24M40 28v24" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round" />
+            <circle cx="40" cy="40" r="8" stroke="#0EA5E9" stroke-width="2" />
+          </svg>
+          <p><strong>Ready for Analysis</strong><br />Upload an image on the left and tap <strong>Analyze Image</strong>
+            to display model predictions.</p>
+        </div>
+
+        <div id="results-content" class="hidden">
+          <h2 class="card-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+            Differential Diagnostic Output
+          </h2>
+          <div id="model-results"></div>
+        </div>
+
+        <!-- Spinner -->
+        <div id="spinner" class="spinner hidden">
+          <div class="spinner-ring"></div>
+          <p>Running multi-model neural inference…</p>
+        </div>
+      </div>
+
+    </div><!-- /.classifier-grid -->
+
+    <!-- ── PLAIN ENGLISH REPORT OVERVIEW FOR NORMAL PEOPLE ── -->
+    <section class="patient-report-guide">
+      <div class="section-tag">Plain Language Summary</div>
+      <h2>Understanding The Research Report in Plain English</h2>
+      <p class="guide-subtitle">
+        A simple breakdown of our findings designed for everyday users without medical or data-science backgrounds.
+      </p>
+
+      <div class="guide-cards-grid">
+        <div class="guide-card">
+          <div class="guide-badge-num">1</div>
+          <h3>Why is skin spot classification difficult?</h3>
+          <p>
+            Normal, harmless moles (<em>Melanocytic nevi</em>) make up roughly <strong>67%</strong> of all skin spots.
+            Dangerous spots like <strong>Melanoma</strong> are far rarer (around 11%), and rare harmless spots like
+            <strong>Dermatofibromas</strong> make up only 1%.
+            Because computers see mostly normal moles during training, they tend to default to guessing "normal mole"
+            unless specifically calibrated.
+          </p>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-badge-num">2</div>
+          <h3>Which AI model worked best?</h3>
+          <p>
+            <strong>ResNet-50</strong> achieved the highest raw accuracy (<strong>82.42%</strong>) and gave the most
+            consistent overall scores.
+            <strong>EfficientNet-B0</strong> was close behind (<strong>81.33%</strong>) while being much smaller and
+            faster.
+            <strong>DINOv2</strong> (a newer self-learning foundation model) reached <strong>75.82%</strong>, showing
+            great promise but not yet beating the specialized CNN models.
+          </p>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-badge-num">3</div>
+          <h3>Can the AI catch dangerous melanomas?</h3>
+          <p>
+            In our controlled testing, models correctly detected melanoma between <strong>49% and 57%</strong> of the
+            time.
+            This means that about 4 out of 10 melanomas were mistaken for harmless spots or other cancers.
+            <strong>Crucial takeaway:</strong> While AI is a fantastic secondary assistant, human dermatologists with
+            dermoscopes and biopsies remain irreplaceable.
+          </p>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-badge-num">4</div>
+          <h3>What do the risk colors mean?</h3>
+          <p>
+            <strong style="color: #DC2626;">Red (High Risk)</strong> indicates malignant conditions (Melanoma, Basal
+            Cell Carcinoma, Actinic Keratoses).<br />
+            <strong style="color: #D97706;">Yellow (Medium Risk)</strong> indicates vascular growths that should be
+            checked if changing or bleeding.<br />
+            <strong style="color: #16A34A;">Green (Low Risk)</strong> indicates benign moles or non-cancerous skin
+            spots.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick link to the complete report -->
+      <div class="report-link-banner">
+        <div>
+          <h4>Interested in the full scientific data?</h4>
+          <p>Inspect ROC curves, per-class F1 matrices, class balance graphs, and training logs.</p>
+        </div>
+        <a href="/results" class="btn-primary-compact">View Complete Scientific Report →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ───── FOOTER ───── -->
+  <footer class="site-footer">
+    <p>CSE-471 Deep Learning Project · Skin Lesion Classification · Educational &amp; Research Use Only</p>
+  </footer>
+
+  <!-- Result template (hidden, cloned by JS) -->
+  <template id="result-template">
+    <div class="model-result-block">
+      <div class="model-result-header">
+        <div class="model-result-name">
+          <span class="model-dot"></span>
+          <span class="model-name-text"></span>
+          <span class="model-note-badge hidden"></span>
+        </div>
+        <div class="predicted-pill">
+          <span class="pred-label"></span>
+          <span class="pred-conf"></span>
+        </div>
+      </div>
+      <div class="pred-desc"></div>
+      <div class="risk-banner"></div>
+      <div class="score-bars"></div>
+
+      <!-- Plain Text Clinical & Patient Review Section -->
+      <div class="model-text-review">
+        <div class="review-header">
+          <span class="review-icon">📋</span>
+          <h4 class="review-title">Clinical Review &amp; Assessment</h4>
+        </div>
+        <p class="review-summary"></p>
+        <div class="review-detail-row">
+          <div class="review-detail-box advice-box">
+            <strong>Recommended Action:</strong>
+            <span class="review-advice"></span>
+          </div>
+          <div class="review-detail-box watch-box">
+            <strong>Key Signs to Monitor:</strong>
+            <span class="review-watch"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+
+</html>
