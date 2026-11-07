@@ -209,13 +209,11 @@
       <div class="guide-cards-grid">
         <div class="guide-card">
           <div class="guide-badge-num">1</div>
-          <h3>Why is skin spot classification difficult?</h3>
+          <h3>Why is classification difficult?</h3>
           <p>
-            Normal, harmless moles (<em>Melanocytic nevi</em>) make up roughly <strong>67%</strong> of all skin spots.
-            Dangerous spots like <strong>Melanoma</strong> are far rarer (around 11%), and rare harmless spots like
-            <strong>Dermatofibromas</strong> make up only 1%.
-            Because computers see mostly normal moles during training, they tend to default to guessing "normal mole"
-            unless specifically calibrated.
+            Harmless moles (<em>Melanocytic nevi</em>) make up <strong>67%</strong> of skin spots, while dangerous
+            <strong>Melanoma</strong> is only ~11%. Because AI trains mostly on normal moles, it defaults to "harmless"
+            unless carefully calibrated for rare cancers.
           </p>
         </div>
 
@@ -223,37 +221,29 @@
           <div class="guide-badge-num">2</div>
           <h3>Which AI model worked best?</h3>
           <p>
-            <strong>ResNet-50</strong> achieved the highest raw accuracy (<strong>82.42%</strong>) and gave the most
-            consistent overall scores.
-            <strong>EfficientNet-B0</strong> was close behind (<strong>81.33%</strong>) while being much smaller and
-            faster.
-            <strong>DINOv2</strong> (a newer self-learning foundation model) reached <strong>75.82%</strong>, showing
-            great promise but not yet beating the specialized CNN models.
+            <strong>ResNet-50</strong> led with <strong>82.42%</strong> accuracy.
+            <strong>EfficientNet-B0</strong> was close at <strong>81.33%</strong> while being smaller and faster.
+            <strong>DINOv2</strong> reached <strong>75.82%</strong> — promising but not yet ahead of CNNs.
           </p>
         </div>
 
         <div class="guide-card">
           <div class="guide-badge-num">3</div>
-          <h3>Can the AI catch dangerous melanomas?</h3>
+          <h3>Can AI catch melanoma?</h3>
           <p>
-            In our controlled testing, models correctly detected melanoma between <strong>49% and 57%</strong> of the
-            time.
-            This means that about 4 out of 10 melanomas were mistaken for harmless spots or other cancers.
-            <strong>Crucial takeaway:</strong> While AI is a fantastic secondary assistant, human dermatologists with
-            dermoscopes and biopsies remain irreplaceable.
+            Models correctly identified melanoma <strong>49–57%</strong> of the time, meaning ~4 in 10 were missed.
+            <strong>Key takeaway:</strong> AI is a useful second opinion, but a dermatologist with a dermoscope
+            remains essential.
           </p>
         </div>
 
         <div class="guide-card">
           <div class="guide-badge-num">4</div>
-          <h3>What do the risk colors mean?</h3>
+          <h3>What do risk colors mean?</h3>
           <p>
-            <strong style="color: #DC2626;">Red (High Risk)</strong> indicates malignant conditions (Melanoma, Basal
-            Cell Carcinoma, Actinic Keratoses).<br />
-            <strong style="color: #D97706;">Yellow (Medium Risk)</strong> indicates vascular growths that should be
-            checked if changing or bleeding.<br />
-            <strong style="color: #16A34A;">Green (Low Risk)</strong> indicates benign moles or non-cancerous skin
-            spots.
+            <strong style="color: #DC2626;">🔴 Red (High Risk)</strong> — Melanoma, BCC, Actinic Keratoses.<br />
+            <strong style="color: #D97706;">🟡 Yellow (Medium Risk)</strong> — Vascular lesions; check if changing.<br />
+            <strong style="color: #16A34A;">🟢 Green (Low Risk)</strong> — Benign moles; non-cancerous.
           </p>
         </div>
       </div>
