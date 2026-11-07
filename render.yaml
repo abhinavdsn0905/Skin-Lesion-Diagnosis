@@ -8,8 +8,11 @@ services:
     startCommand: gunicorn --chdir skin_lesion_app app:app --bind 0.0.0.0:$PORT --timeout 120 --workers 1
     envVars:
       - key: PYTHON_VERSION
-        value: 3.10.14
+        value: "3.10.14"
+      - key: FLASK_ENV
+        value: production
     disk:
       name: uploads
       mountPath: /opt/render/project/src/skin_lesion_app/uploads
       sizeGB: 1
+
